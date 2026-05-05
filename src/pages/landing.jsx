@@ -10,7 +10,19 @@ import { RiTwitterXFill } from "react-icons/ri";
 gsap.registerPlugin(useGSAP, SplitText);
 const Landing = () => {
   // products
-  const products = ["../../public/nike/img4.png", "../../public/nike/img6.png"];
+  const products = [
+    "/nike-output-img/air-gorden-1-mid-se.png",
+    "/nike-output-img/air-jorden-1-low-se-craft.png",
+    "/nike-output-img/air-jorden-1-low-se.png",
+    "/nike-output-img/air-jorden-1-mid-2.png",
+    "/nike-output-img/air-jorden-1-mid-3.png",
+    "/nike-output-img/air-jorden-1-mid-4.png",
+    "/nike-output-img/air-jorden-1-mid.png",
+    "/nike-output-img/air-jorden-1-retro-high-og-flight-club.png",
+    "/nike-output-img/air-jorden-1-retro-high-og.png",
+    "/nike-output-img/air-jorden-1-retro-low-og.png",
+    "/nike-output-img/nike-shoes-white-background_1301901-28.png",
+  ];
 
   // temp arr for size
   const size = [7, 8, 9, 10, 11, 12, 13, 14];

@@ -1,8 +1,8 @@
 const Collection = () => {
   return (
     <>
-      <div className="absolute bg-pink-300">
-        <h1>collection</h1>
+      <div className="absolute w-full">
+        <div className="w-full h-screen bg-red-500">h</div>
       </div>
     </>
   );

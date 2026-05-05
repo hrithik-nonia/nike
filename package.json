@@ -4,21 +4,26 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "convert-images": "node scripts/convert.js",
+    "dev": "npm run convert-images && vite",
+    "build": "npm run convert-images && vite build"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@imgly/background-removal-node": "^1.4.5",
     "@tailwindcss/vite": "^4.2.4",
+    "form-data": "^4.0.5",
     "gsap": "^3.15.0",
     "lottie-react": "^2.4.1",
     "motion": "^12.38.0",
+    "node-fetch": "^3.3.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-icons": "^5.6.0",
     "react-router-dom": "^7.14.2",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
