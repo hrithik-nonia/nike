@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
-import navLinks from "../constant";
+import { navLinks } from "../constant";
 
 // register plugin
 gsap.registerPlugin(useGSAP, SplitText);
