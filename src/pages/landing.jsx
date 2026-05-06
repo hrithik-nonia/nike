@@ -318,6 +318,9 @@ const Landing = () => {
       }
     });
   }, [index]);
+
+  // ckeck is sign up
+
   return (
     <section className="absolute w-full">
       {/* CENTER — Product Slider */}

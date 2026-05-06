@@ -1,9 +1,10 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { navLinks } from "../constant";
+import Login from "../component/login-form";
 
 // register plugin
 gsap.registerPlugin(useGSAP, SplitText);
@@ -255,6 +256,13 @@ const NavBar = () => {
       ease: "power3.out",
     });
   }, []);
+
+  // check is sign up
+  const [isSignUp, setIsSignUp] = useState(null);
+
+  // show login form
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
     <>
       <nav
@@ -309,16 +317,31 @@ const NavBar = () => {
 
         {/* Cart + Login */}
         <div className="flex items-center gap-2">
-          <NavLink
-            ref={loginRef}
-            to="#"
-            className="text-white/100 text-[13px] font-medium px-4 py-2 rounded-full border border-white/30 transition-all bg-white/5 backdrop-blur-md"
-          >
-            <span className="login-text relative z-10">Login</span>
-            <span className="login-icon absolute inset-0 flex items-center justify-center z-0">
-              👤
-            </span>
-          </NavLink>
+          {isSignUp ? (
+            <button
+              ref={loginRef}
+              to="#"
+              className="text-white/100 text-[13px] font-medium px-4 py-2 rounded-full border border-white/30 transition-all bg-white/5 backdrop-blur-md"
+            >
+              <span className="login-text relative z-10">Log in</span>
+              <span className="login-icon absolute inset-0 flex items-center justify-center z-0">
+                👤
+              </span>
+            </button>
+          ) : (
+            <button
+              ref={loginRef}
+              to="#"
+              className="text-white/100 text-[13px] font-medium px-4 py-2 rounded-full border border-white/30 transition-all bg-white/5 backdrop-blur-md"
+              onClick={() => setShowLogin(true)}
+            >
+              <span className="login-text relative z-10">Sign Up</span>
+              <span className="login-icon absolute inset-0 flex items-center justify-center z-0">
+                👤
+              </span>
+            </button>
+          )}
+
           <NavLink
             ref={cartRef}
             to="#"
@@ -331,6 +354,9 @@ const NavBar = () => {
           </NavLink>
         </div>
       </nav>
+
+      {/* login form */}
+      {showLogin && <Login onClose={() => setShowLogin(false)} />}
     </>
   );
 };
