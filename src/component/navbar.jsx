@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
@@ -9,6 +9,14 @@ import { navLinks } from "../constant";
 gsap.registerPlugin(useGSAP, SplitText);
 
 const NavBar = () => {
+  // find current path
+  const location = useLocation();
+
+  // find active index
+  const currentIndex = navLinks.findIndex(
+    (link) => link.link === location.pathname,
+  );
+
   // logo ref for logo animation
   const logoRef = useRef();
 
@@ -75,18 +83,6 @@ const NavBar = () => {
 
   //  link ref for link animation
   const linkRef = useRef();
-
-  // index of links
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // total no of links
-  const totalLinks = navLinks.length;
-
-  // esitch to next index of link
-  const goToSlide = (index) => {
-    const newIndex = (index + totalLinks) % totalLinks;
-    setCurrentIndex(newIndex);
-  };
 
   const handleEnter = (item) => {
     const text = item.querySelector(".nav-text");
@@ -296,7 +292,6 @@ const NavBar = () => {
                 }`}
                 onMouseEnter={(e) => handleEnter(e.currentTarget)}
                 onMouseLeave={(e) => handleLeave(e.currentTarget)}
-                onClick={() => goToSlide(index)}
               >
                 {/* TEXT */}
                 <span className="nav-text relative z-10 whitespace-nowrap">
