@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function ProductCard({ product, index }) {
+export default function ProductType({ product, index }) {
   const [hovered, setHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -14,9 +14,9 @@ export default function ProductCard({ product, index }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="w-full flex items-center justify-center h-24">
+      <div className="w-full  h-24 between">
         {imgError ? (
-          <div className="w-24 h-16 bg-white rounded-lg flex items-center justify-center">
+          <div className="w-24 h-16 bg-white rounded-lg between">
             <span className="text-xs text-gray-400 text-center px-1">
               {product.name}
             </span>

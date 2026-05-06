@@ -46,7 +46,7 @@ export const aboutPageText = [
   }
 ]
 
-export const products = [
+export const productsType = [
   {
     id: 1,
     name: "Air Jordan 1",
@@ -126,5 +126,94 @@ export const products = [
     id: 16,
     name: "Shorts",
     img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/c3d4e5f6-a7b8-c9d0-e1f2-a3b4c5d6e7f8/challenger-7-brief-lined-versatile-shorts-KBqXSd.png",
+  },
+];
+
+
+// filters for product section
+export const filters = [
+  { label: "Gender", options: ["Men", "Women", "Kids"] },
+  { label: "Size", options: ["6", "7", "8", "9", "10", "11", "12"] },
+  { label: "Shop By Price", options: ["Under ₹5,000", "₹5,000–₹10,000", "₹10,000–₹20,000", "Above ₹20,000"] },
+  { label: "Product Label", options: ["Just In", "Sale", "Sustainable"] },
+  { label: "Launched In", options: ["2024", "2023", "2022"] },
+  { label: "Colour", options: ["Black", "White", "Red", "Blue", "Green"] },
+  { label: "Shoe Height", options: ["Low", "Mid", "High"] },
+];
+
+
+// products for product
+export const products = [
+  {
+    id: 1,
+    badge: "Just In",
+    name: "Air Jordan 1 Low SE",
+    category: "Men's Shoes",
+    price: "₹11,495",
+    colors: [],
+    img: "../../public/nike-output-img/air-gorden-1-mid-se.png",
+  },
+  {
+    id: 2,
+    badge: "Just In",
+    name: "Air Jordan 1 Retro High OG Flight Club",
+    category: "Men's Shoes",
+    price: "₹16,995",
+    colors: [],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0/a97bb6c2-7cf6-481f-8e45-0cf97b5a8fea/air-jordan-1-retro-high-og-shoes-vbgd2K.png",
+  },
+  {
+    id: 3,
+    badge: "Just In",
+    name: "Air Jordan 1 Mid",
+    category: "Men's Shoes",
+    price: "₹11,495",
+    colors: ["#111", "#e5e5e5"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0b421570-1b56-4c56-843c-1b09e7fcf571/air-jordan-1-mid-shoes-BpARcz.png",
+  },
+  {
+    id: 4,
+    badge: "Just In",
+    name: "Air Jordan 1 Low",
+    category: "Men's Shoes",
+    price: "₹9,295",
+    colors: ["#111", "#c00"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3b0a12e3-c7ce-4fca-b5b9-f2f8c8ac4c2a/dunk-low-retro-shoes-76KnBL.png",
+  },
+  {
+    id: 5,
+    badge: "Just In",
+    name: "Air Jordan 1 Elevate Low",
+    category: "Women's Shoes",
+    price: "₹10,295",
+    colors: ["#fff", "#555"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0/01fb3def-33fe-4696-97af-d0b21e54a1d0/air-force-1-07-shoes-WrLlWX.png",
+  },
+  {
+    id: 6,
+    badge: "Just In",
+    name: "Air Jordan 1 High OG",
+    category: "Men's Shoes",
+    price: "₹14,995",
+    colors: ["#1a1a2e", "#e5e5e5"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9a4e8bb5-8b91-4bda-9b7e-67e8c4e2d0a7/vomero-18-road-running-shoes-r64mpX.png",
+  },
+  {
+    id: 7,
+    badge: "Just In",
+    name: "Air Jordan 1 Elevate Low",
+    category: "Women's Shoes",
+    price: "₹10,295",
+    colors: ["#fff", "#555"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0/01fb3def-33fe-4696-97af-d0b21e54a1d0/air-force-1-07-shoes-WrLlWX.png",
+  },
+  {
+    id: 8,
+    badge: "Just In",
+    name: "Air Jordan 1 High OG",
+    category: "Men's Shoes",
+    price: "₹14,995",
+    colors: ["#1a1a2e", "#e5e5e5"],
+    img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/9a4e8bb5-8b91-4bda-9b7e-67e8c4e2d0a7/vomero-18-road-running-shoes-r64mpX.png",
   },
 ];

@@ -1,0 +1,74 @@
+import { FilterDropdown } from "./cropdown";
+import { filters, products } from "../constant";
+import ProductCard from "../component/product-card";
+import Footer from "./footer";
+import { useState, useEffect, useRef } from "react";
+
+const getFilter = (label) => filters.find((f) => f.label === label);
+
+const BATCH = 6; //how many products laod on scroll
+
+export function MainSection() {
+  const [visible, setVisible] = useState(BATCH);
+  const loaderRef = useRef(null);
+
+  const visibleProducts = products.slice(0, visible);
+  const hasMore = visible < products.length;
+
+  // load products when loder div comes on screen
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setVisible((prev) => prev + BATCH);
+        }
+      },
+      { threshold: 1.0 },
+    );
+
+    if (loaderRef.current) observer.observe(loaderRef.current);
+    return () => observer.disconnect();
+  }, [hasMore]);
+  return (
+    <div className="px-8 pt-4">
+      <h1 className="text-2xl text-white font-semibold pb-5">
+        Air Jordan 1 (36)
+      </h1>
+      <div className="grid grid-cols-12 items-start ">
+        <div className="col-span-2 border border-white/40 bg-white/10 backdrop-blur-md rounded-lg p-5 text-white sticky top-0 min-h-screen">
+          {/* side bar  */}
+          <div className="space-y-6">
+            <FilterDropdown filter={getFilter("Gender")} />
+            <FilterDropdown filter={getFilter("Size")} />
+            <FilterDropdown filter={getFilter("Shop By Price")} />
+            <FilterDropdown filter={getFilter("Product Label")} />
+            <FilterDropdown filter={getFilter("Launched In")} />
+            <FilterDropdown filter={getFilter("Colour")} />
+            <FilterDropdown filter={getFilter("Shoe Height")} />
+          </div>
+        </div>
+
+        {/* product section */}
+        <div className="col-span-10  grid grid-cols-3 ps-15">
+          {visibleProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+
+        {/* loder div */}
+        {hasMore && (
+          <div ref={loaderRef} className="flex justify-center py-8">
+            <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          </div>
+        )}
+
+        {!hasMore && (
+          <p className="text-center text-white/40 text-sm py-8">
+            All products loaded
+          </p>
+        )}
+      </div>
+      <Footer />
+    </div>
+  );
+}
