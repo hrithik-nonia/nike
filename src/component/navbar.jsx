@@ -4,7 +4,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { navLinks } from "../constant";
-import Login from "../component/login-form";
+import Login from "./login";
+import SignUp from "./sign-up";
 
 // register plugin
 gsap.registerPlugin(useGSAP, SplitText);
@@ -258,11 +259,13 @@ const NavBar = () => {
   }, []);
 
   // check is sign up
-  const [isSignUp, setIsSignUp] = useState(null);
+  const [isSignUp, setIsSignUp] = useState("hb");
+
+  // show sign up form
+  const [showSignUp, setShowSignUp] = useState(false);
 
   // show login form
   const [showLogin, setShowLogin] = useState(false);
-
   return (
     <>
       <nav
@@ -322,6 +325,7 @@ const NavBar = () => {
               ref={loginRef}
               to="#"
               className="text-white/100 text-[13px] font-medium px-4 py-2 rounded-full border border-white/30 transition-all bg-white/5 backdrop-blur-md"
+              onClick={() => setShowLogin(true)}
             >
               <span className="login-text relative z-10">Log in</span>
               <span className="login-icon absolute inset-0 flex items-center justify-center z-0">
@@ -333,7 +337,7 @@ const NavBar = () => {
               ref={loginRef}
               to="#"
               className="text-white/100 text-[13px] font-medium px-4 py-2 rounded-full border border-white/30 transition-all bg-white/5 backdrop-blur-md"
-              onClick={() => setShowLogin(true)}
+              onClick={() => setShowSignUp(true)}
             >
               <span className="login-text relative z-10">Sign Up</span>
               <span className="login-icon absolute inset-0 flex items-center justify-center z-0">
@@ -357,6 +361,9 @@ const NavBar = () => {
 
       {/* login form */}
       {showLogin && <Login onClose={() => setShowLogin(false)} />}
+
+      {/* show sign up form */}
+      {showSignUp && <SignUp onClose={() => setShowSignUp(false)} />}
     </>
   );
 };

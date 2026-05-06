@@ -17,7 +17,7 @@ const Login = ({ onClose }) => {
           ✕
         </button>
 
-        <h2 className="text-white text-2xl font-semibold mb-6">Sign Up</h2>
+        <h2 className="text-white text-2xl font-semibold mb-6">Log In</h2>
 
         <div className="space-y-4">
           <input
@@ -37,7 +37,7 @@ const Login = ({ onClose }) => {
           />
 
           <button className="w-full bg-white text-black font-semibold py-2.5 rounded-lg hover:bg-white/90 transition-all">
-            Sign Up
+            Log In
           </button>
         </div>
       </div>
