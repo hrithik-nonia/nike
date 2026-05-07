@@ -266,6 +266,7 @@ const NavBar = () => {
 
   // show login form
   const [showLogin, setShowLogin] = useState(false);
+
   return (
     <>
       <nav
@@ -348,7 +349,7 @@ const NavBar = () => {
 
           <NavLink
             ref={cartRef}
-            to="#"
+            to="/cart"
             className="text-black text-[13px] font-semibold px-4 py-2 rounded-full bg-white  transition-all backdrop-blur-md"
           >
             <span className="cart-text relative z-10">Cart (0)</span>

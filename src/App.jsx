@@ -4,12 +4,16 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Contact from "./pages/contact-page";
 import AboutPage from "./pages/about-page";
 import Collection from "./pages/collection-page";
+import Cart from "./pages/cart";
+
 export default function App() {
   const location = useLocation();
 
   // condition based routing
   const isRoutable =
-    location.pathname === "/about" || location.pathname === "/collection";
+    location.pathname === "/about" ||
+    location.pathname === "/collection" ||
+    "/cart";
 
   return (
     // ✅ Ek hi wrapper — sab routes isme
@@ -34,6 +38,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/Cart" element={<Cart />} />
       </Routes>
     </div>
   );
