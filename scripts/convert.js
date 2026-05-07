@@ -10,8 +10,8 @@ import fetch from "node-fetch";
 import FormData from "form-data";
 import sharp from "sharp";
 
-const inputDir = "./public/nike";
-const outputDir = "./public/nike-output-img";
+const inputDir = "./public/nike-shoe-input-img";
+const outputDir = "./public/nike-shoe-output-img";
 const tempDir = "./public/nike-temp";       // ✅ temp folder for JPG
 const API_KEY = "ySXCzYthkh6jqgi4RL1w6iR9";
 

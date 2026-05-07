@@ -6,39 +6,10 @@ import { NavLink } from "react-router-dom";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { CiFacebook } from "react-icons/ci";
 import { RiTwitterXFill } from "react-icons/ri";
+import { products } from "../constant";
 
 gsap.registerPlugin(useGSAP, SplitText);
 const Landing = () => {
-  // products
-  const products = [
-    "/nike-output-img/air-gorden-1-mid-se.png",
-    "/nike-output-img/air-jorden-1-low-se-craft.png",
-    "/nike-output-img/air-jorden-1-low-se.png",
-    "/nike-output-img/air-jorden-1-mid-2.png",
-    "/nike-output-img/air-jorden-1-mid-3.png",
-    "/nike-output-img/air-jorden-1-mid-4.png",
-    "/nike-output-img/air-jorden-1-mid.png",
-    "/nike-output-img/air-jorden-1-retro-high-og-flight-club.png",
-    "/nike-output-img/air-jorden-1-retro-high-og.png",
-    "/nike-output-img/air-jorden-1-retro-low-og.png",
-    "/nike-output-img/nike-shoes-white-background_1301901-28.png",
-  ];
-
-  // temp arr for size
-  const size = [7, 8, 9, 10, 11, 12, 13, 14];
-
-  // index of links
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // total no of links
-  const totalSize = size.length;
-
-  // esitch to next index of link
-  const goToSlide = (index) => {
-    const newIndex = (index + totalSize) % totalSize;
-    setCurrentIndex(newIndex);
-  };
-
   // animation for left section
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -246,13 +217,48 @@ const Landing = () => {
   // state for product scroll
   const [index, setIndex] = useState(0);
 
+  // fiter products by shoes
+  const filteredProducts = products.filter(
+    (product) => product.title === "shoe",
+  );
+
   // left / right btn
   const next = () => {
-    setIndex((prev) => (prev + 1) % products.length);
+    setIndex((prev) => (prev + 1) % filteredProducts.length);
   };
 
   const prev = () => {
-    setIndex((prev) => (prev - 1 + products.length) % products.length);
+    setIndex(
+      (prev) => (prev - 1 + filteredProducts.length) % filteredProducts.length,
+    );
+  };
+
+  // show landing page data
+  // shoe name
+  const name = filteredProducts[index].name;
+
+  // description for shoes
+  const description = filteredProducts[index].desc;
+
+  // type of shoe
+  const typeOfShoe = filteredProducts[index].type;
+
+  // price of shoes
+  const price = filteredProducts[index].price;
+
+  // sizes of shoe
+  const size = filteredProducts[index].size;
+
+  // index \of size arr
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // total length of arr
+  const totalSize = size.length;
+
+  // esitch to next index of size
+  const goToSlide = (index) => {
+    const newIndex = (index + totalSize) % totalSize;
+    setCurrentIndex(newIndex);
   };
 
   // slider animation
@@ -319,23 +325,21 @@ const Landing = () => {
     });
   }, [index]);
 
-  // ckeck is sign up
-
   return (
     <section className="absolute w-full">
       {/* CENTER — Product Slider */}
       <div className="relative w-full h-screen overflow-hidden">
         <div className="slider absolute inset-0">
-          {products.map((img, i) => (
+          {filteredProducts.map((items, index) => (
             <div
-              key={i}
-              className="absolute inset-0 flex items-center justify-center"
+              key={index}
+              className="absolute inset-0 between"
               style={{
-                transform: i === 0 ? "translateX(0%)" : "translateX(100%)",
-                opacity: i === 0 ? 1 : 0,
+                transform: index === 0 ? "translateX(0%)" : "translateX(100%)",
+                opacity: index === 0 ? 1 : 0,
               }}
             >
-              <img src={img} className="h-[400px] object-contain" />
+              <img src={items.img} className="h-[400px] object-contain" />
               <div className="product-shadow absolute bottom-[80px] w-40 h-6 bg-black/40 rounded-full blur-md" />
             </div>
           ))}
@@ -343,6 +347,7 @@ const Landing = () => {
       </div>
 
       {/* 🔥 Overlay (2 Columns) */}
+
       <div className="absolute inset-0 flex z-20 pt-10">
         {/* left section */}
         <div className="w-1/2  flex  px-8 flex-col gap-5">
@@ -363,8 +368,8 @@ const Landing = () => {
               Step
             </h1>
 
-            <p className="shoe-text text-white text-2xl tracking-[2.5px] uppercase mt-8 font-bold relative inline-block">
-              shoe name
+            <p className="shoe-text text-white text-xl tracking-[2.5px] uppercase mt-8 font-semibold relative inline-block ">
+              {name}
               <span
                 className="shoe-underline absolute left-0 bottom-[-6px] w-full h-[2px] 
                 bg-gradient-to-r from-white to-transparent 
@@ -393,9 +398,7 @@ const Landing = () => {
           </button>
 
           <p className="discreption-text text-white/80 text-sm leading-relaxed max-w-sm">
-            Step into next-level comfort and performance. Designed with
-            lightweight materials, breathable knit upper, and responsive
-            cushioning for all-day movement and style.
+            {description}
           </p>
 
           <NavLink
@@ -415,7 +418,7 @@ const Landing = () => {
             rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-4  text-center "
           >
             <p className="text-white font-bold inline-block scale-x-125 ">
-              NIKE
+              {typeOfShoe}
             </p>
           </NavLink>
 
@@ -507,7 +510,7 @@ const Landing = () => {
             </button>
 
             <span className="price-text text-white font-bold text-sm whitespace-nowrap">
-              $ 700
+              {price}
             </span>
           </div>
         </div>

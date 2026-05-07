@@ -145,16 +145,24 @@ export const filters = [
 // products for product
 export const products = [
   {
-    id: 1,
+
+    title: "shoe",
+    desc: `Built for speed, comfort, and everyday performance. These Nike shoes feature lightweight cushioning, responsive support, and a breathable design that keeps you moving confidently all day long.`,
+    type: "Air Jordan",
+    size: [6, 7, 8, 9, 10, 11],
     badge: "Just In",
     name: "Air Jordan 1 Low SE",
     category: "Men's Shoes",
     price: "₹11,495",
     colors: [],
-    img: "../../public/nike-output-img/air-gorden-1-mid-se.png",
+    img: "./public/nike-shoe-output-img/air-jorden-1-mid-2.png",
   },
   {
-    id: 2,
+
+    title: "shoe",
+    desc: `Built for speed, comfort, and everyday performance. These Nike shoes feature lightweight cushioning, responsive support, and a breathable design that keeps you moving confidently all day long.`,
+    type: "Air Jordan",
+    size: [6, 7, 8, 9, 10],
     badge: "Just In",
     name: "Air Jordan 1 Retro High OG Flight Club",
     category: "Men's Shoes",
@@ -163,8 +171,9 @@ export const products = [
     img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0/a97bb6c2-7cf6-481f-8e45-0cf97b5a8fea/air-jordan-1-retro-high-og-shoes-vbgd2K.png",
   },
   {
-    id: 3,
+
     badge: "Just In",
+    title: "shoe",
     name: "Air Jordan 1 Mid",
     category: "Men's Shoes",
     price: "₹11,495",
@@ -172,7 +181,7 @@ export const products = [
     img: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0b421570-1b56-4c56-843c-1b09e7fcf571/air-jordan-1-mid-shoes-BpARcz.png",
   },
   {
-    id: 4,
+
     badge: "Just In",
     name: "Air Jordan 1 Low",
     category: "Men's Shoes",
