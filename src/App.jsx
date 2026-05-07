@@ -13,7 +13,7 @@ export default function App() {
   const isRoutable =
     location.pathname === "/about" ||
     location.pathname === "/collection" ||
-    "/cart";
+    location.pathname === "/cart";
 
   return (
     // ✅ Ek hi wrapper — sab routes isme
