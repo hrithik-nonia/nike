@@ -1,12 +1,14 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
-import { useState } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { CiFacebook } from "react-icons/ci";
 import { RiTwitterXFill } from "react-icons/ri";
 import { products } from "../constant";
+import { AppContext } from "../context-store/app-context";
+import { FastAverageColor } from "fast-average-color";
 
 gsap.registerPlugin(useGSAP, SplitText);
 const Landing = () => {
@@ -325,21 +327,117 @@ const Landing = () => {
     });
   }, [index]);
 
+  // for background color
+  const { setBgColor } = useContext(AppContext);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+
+    const extractColor = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = img.naturalWidth || img.width;
+        canvas.height = img.naturalHeight || img.height;
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        // Center pixel ka color lo
+        const pixel = ctx.getImageData(
+          Math.floor(canvas.width / 2),
+          Math.floor(canvas.height / 2),
+          1,
+          1,
+        ).data;
+
+        const r = pixel[0];
+        const g = pixel[1];
+        const b = pixel[2];
+
+        // Agar center pixel transparent/white hai to corner try karo
+        if (r > 240 && g > 240 && b > 240) {
+          // Dominant color ke liye sample karo
+          const sampleData = ctx.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height,
+          ).data;
+          let totalR = 0,
+            totalG = 0,
+            totalB = 0,
+            count = 0;
+
+          for (let i = 0; i < sampleData.length; i += 16) {
+            const pr = sampleData[i];
+            const pg = sampleData[i + 1];
+            const pb = sampleData[i + 2];
+            const pa = sampleData[i + 3]; // alpha
+
+            // Transparent pixels skip karo
+            if (pa < 128) continue;
+            // White/near-white skip karo
+            if (pr > 230 && pg > 230 && pb > 230) continue;
+
+            totalR += pr;
+            totalG += pg;
+            totalB += pb;
+            count++;
+          }
+
+          if (count > 0) {
+            setBgColor(
+              `rgb(${Math.floor(totalR / count)}, ${Math.floor(totalG / count)}, ${Math.floor(totalB / count)})`,
+            );
+          } else {
+            setBgColor("rgb(20, 20, 20)");
+          }
+        } else {
+          setBgColor(`rgb(${r}, ${g}, ${b})`);
+        }
+      } catch (e) {
+        console.warn("Canvas extraction failed:", e);
+        setBgColor("rgb(20, 20, 20)");
+      }
+    };
+
+    const timer = setTimeout(() => {
+      if (img.complete && img.naturalWidth > 0) {
+        extractColor();
+      } else {
+        img.addEventListener("load", extractColor);
+      }
+    }, 50);
+
+    return () => {
+      clearTimeout(timer);
+      img.removeEventListener("load", extractColor);
+    };
+  }, [index]);
+
   return (
     <section className="absolute w-full">
       {/* CENTER — Product Slider */}
       <div className="relative w-full h-screen overflow-hidden">
         <div className="slider absolute inset-0">
-          {filteredProducts.map((items, index) => (
+          {filteredProducts.map((items, i) => (
             <div
-              key={index}
+              key={i}
               className="absolute inset-0 between"
               style={{
-                transform: index === 0 ? "translateX(0%)" : "translateX(100%)",
-                opacity: index === 0 ? 1 : 0,
+                transform: i === 0 ? "translateX(0%)" : "translateX(100%)",
+                opacity: i === 0 ? 1 : 0,
               }}
             >
-              <img src={items.img} className="h-[400px] object-contain" />
+              <img
+                src={items.img}
+                className="h-[400px] object-contain"
+                ref={i === index ? imgRef : null}
+                crossOrigin="anonymous"
+              />
               <div className="product-shadow absolute bottom-[80px] w-40 h-6 bg-black/40 rounded-full blur-md" />
             </div>
           ))}

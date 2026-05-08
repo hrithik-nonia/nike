@@ -5,7 +5,8 @@ import Contact from "./pages/contact-page";
 import AboutPage from "./pages/about-page";
 import Collection from "./pages/collection-page";
 import Cart from "./pages/cart";
-
+import { useContext } from "react";
+import { AppContext } from "./context-store/app-context";
 export default function App() {
   const location = useLocation();
 
@@ -15,17 +16,28 @@ export default function App() {
     location.pathname === "/collection" ||
     location.pathname === "/cart";
 
+  // set background color
+  const { bgColor } = useContext(AppContext);
   return (
     // ✅ Ek hi wrapper — sab routes isme
     <div
-      className={`relative w-full bg-black ${!isRoutable ? "h-screen overflow-hidden" : ""}`}
+      className={`relative w-full  ${!isRoutable ? "h-screen overflow-hidden" : ""}`}
+      style={{
+        backgroundColor: bgColor,
+        transition: "background-color 0.8s ease", // smooth color change
+      }}
     >
       {/* ✅ Sirf ye 3 divs conditional hain — Routes nahi */}
       {!isRoutable && (
         <>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1f1f1f_100%,#0a0a0a_1%,#000_1%)]" />
-          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black to-transparent" />
-          <div className="absolute top-0 right-0 bottom-0 w-1/2 bg-gradient-to-l from-black to-transparent" />
+          {/* Radial gradient - center dark, edges transparent */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,transparent_10%,rgba(0,0,0,1)_100%)]" />
+
+          {/* Bottom fade - thoda kam opacity */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+
+          {/* Right fade */}
+          <div className="absolute top-0 right-0 bottom-0 w-1/2 bg-gradient-to-l from-black/70 to-transparent" />
         </>
       )}
 
