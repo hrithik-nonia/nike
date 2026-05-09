@@ -9,6 +9,7 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { products } from "../constant";
 import { AppContext } from "../context-store/app-context";
 import namer from "color-namer"; //to simplify color name
+import ProductDetailModal from "../component/product-detail-model";
 
 gsap.registerPlugin(useGSAP, SplitText);
 const Landing = () => {
@@ -427,208 +428,217 @@ const Landing = () => {
   // simplify color name
   const result = namer(bgColor);
 
+  // show product detail model
+  const [isModel, setIsModel] = useState(false);
+
   return (
-    <section className="absolute w-full">
-      {/* CENTER — Product Slider */}
-      <div className="relative w-full h-screen overflow-hidden">
-        <div className="slider absolute inset-0">
-          {filteredProducts.map((items, i) => (
-            <div
-              key={i}
-              className="absolute inset-0 between"
-              style={{
-                transform: i === 0 ? "translateX(0%)" : "translateX(100%)",
-                opacity: i === 0 ? 1 : 0,
-              }}
-            >
-              <img
-                src={items.img}
-                className="h-[400px] object-contain"
-                ref={i === index ? imgRef : null}
-                crossOrigin="anonymous"
-              />
-              <div className="product-shadow absolute bottom-[80px] w-40 h-6 bg-black/40 rounded-full blur-md" />
-            </div>
-          ))}
+    <>
+      <section className="absolute w-full">
+        {/* CENTER — Product Slider */}
+        <div className="relative w-full h-screen overflow-hidden">
+          <div className="slider absolute inset-0">
+            {filteredProducts.map((items, i) => (
+              <div
+                key={i}
+                className="absolute inset-0 between"
+                style={{
+                  transform: i === 0 ? "translateX(0%)" : "translateX(100%)",
+                  opacity: i === 0 ? 1 : 0,
+                }}
+              >
+                <img
+                  src={items.img}
+                  className="h-[400px] object-contain"
+                  ref={i === index ? imgRef : null}
+                  crossOrigin="anonymous"
+                />
+                <div className="product-shadow absolute bottom-[80px] w-40 h-6 bg-black/40 rounded-full blur-md" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 🔥 Overlay (2 Columns) */}
+        {/* 🔥 Overlay (2 Columns) */}
 
-      <div className="absolute inset-0 flex z-20 pt-10">
-        {/* left section */}
-        <div className="w-1/2  flex  px-8 flex-col gap-5">
-          <div>
-            <h1
-              className="hero-text text-white text-6xl font-bold leading-tight tracking-tight  "
-              style={{ textShadow: "0 8px 20px rgba(0,0,0,0.6)" }}
-            >
-              Elevate every
-            </h1>
-            <h1
-              className="hero-text text-5xl font-extrabold leading-tight tracking-tight mb-3 transparent"
-              style={{
-                WebkitTextStroke: ".5px #ffffff",
-                textShadow: "0 8px 20px rgba(0,0,0,0.6)",
-              }}
-            >
-              Step
-            </h1>
+        <div className="absolute inset-0 flex z-20 pt-10">
+          {/* left section */}
+          <div className="w-1/2  flex  px-8 flex-col gap-5">
+            <div>
+              <h1
+                className="hero-text text-white text-6xl font-bold leading-tight tracking-tight  "
+                style={{ textShadow: "0 8px 20px rgba(0,0,0,0.6)" }}
+              >
+                Elevate every
+              </h1>
+              <h1
+                className="hero-text text-5xl font-extrabold leading-tight tracking-tight mb-3 transparent"
+                style={{
+                  WebkitTextStroke: ".5px #ffffff",
+                  textShadow: "0 8px 20px rgba(0,0,0,0.6)",
+                }}
+              >
+                Step
+              </h1>
 
-            <NavLink
-              target="_blank"
-              to={`/ProductDetail/${id}`}
-              className="shoe-text text-white text-xl tracking-[2.5px] uppercase mt-8 font-semibold relative inline-block "
-            >
-              {name}
-              <span
-                className="shoe-underline absolute left-0 bottom-[-6px] w-full h-[2px] 
+              <NavLink
+                target="_blank"
+                to={`/ProductDetail/${id}`}
+                className="shoe-text text-white text-xl tracking-[2.5px] uppercase mt-8 font-semibold relative inline-block "
+              >
+                {name}
+                <span
+                  className="shoe-underline absolute left-0 bottom-[-6px] w-full h-[2px] 
                 bg-gradient-to-r from-white to-transparent 
                 rotate-[0.5deg] blur-[0.3px] opacity-80"
-              ></span>
-            </NavLink>
-          </div>
+                ></span>
+              </NavLink>
+            </div>
 
-          {/* left shift button */}
-          <button
-            className=" left-shift-btn my-10 ms-30 group relative w-14 h-14 rounded-full 
+            {/* left shift button */}
+            <button
+              className=" left-shift-btn my-10 ms-30 group relative w-14 h-14 rounded-full 
                 bg-gradient-to-br from-white/20 to-white/5 
                 backdrop-blur-xl border border-white/20 
                 shadow-[0_8px_30px_rgba(0,0,0,0.3)] 
                 hover:scale-105 transition-all duration-300 "
-            onClick={prev}
-          >
-            <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all"></div>
-
-            <span
-              className="relative flex items-center justify-center w-full h-full text-white text-2xl 
-              group-hover:-translate-x-1 transition-transform"
+              onClick={prev}
             >
-              ←
-            </span>
-          </button>
+              <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all"></div>
 
-          <p className="discreption-text text-white/80 text-sm leading-relaxed max-w-sm">
-            {description}
-          </p>
+              <span
+                className="relative flex items-center justify-center w-full h-full text-white text-2xl 
+              group-hover:-translate-x-1 transition-transform"
+              >
+                ←
+              </span>
+            </button>
 
-          <NavLink
-            to="#"
-            className="read-more-btn self-start  text-white/80 text-xs font-bold px-5 py-2.5 rounded-full hover:scale-105 transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.3)]  backdrop-blur-xl border border-white/20 bg-gradient-to-br from-white/20 to-white/5 "
-          >
-            Read more
-          </NavLink>
-        </div>
+            <p className="discreption-text text-white/80 text-sm leading-relaxed max-w-sm">
+              {description}
+            </p>
 
-        {/* right section */}
-        <div className="flex-1 flex flex-col  items-end gap-5 px-8 py-3  text-left ">
-          {/* next shoe brand */}
-          <NavLink
-            className="brand-clip-board w-full max-w-[245px] 
+            <button
+              className="read-more-btn self-start  text-white/80 text-xs font-bold px-5 py-2.5 rounded-full hover:scale-105 transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.3)]  backdrop-blur-xl border border-white/20 bg-gradient-to-br from-white/20 to-white/5 cursor-pointer"
+              onClick={() => setIsModel(true)}
+            >
+              Read more
+            </button>
+          </div>
+
+          {/* right section */}
+          <div className="flex-1 flex flex-col  items-end gap-5 px-8 py-3  text-left ">
+            {/* next shoe brand */}
+            <NavLink
+              className="brand-clip-board w-full max-w-[245px] 
             bg-white/5 backdrop-blur-2xl border border-white/10 
             rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-4  text-center "
-          >
-            <p className="text-white font-bold inline-block scale-x-125 ">
-              {typeOfShoe}
-            </p>
-          </NavLink>
+            >
+              <p className="text-white font-bold inline-block scale-x-125 ">
+                {typeOfShoe}
+              </p>
+            </NavLink>
 
-          <div
-            className="shoe-size-comp bg-white/5 backdrop-blur-2xl border border-white/10 
+            <div
+              className="shoe-size-comp bg-white/5 backdrop-blur-2xl border border-white/10 
             rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-4 "
-          >
-            <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
-              A Shoe Color({result.basic[0].name})
-            </p>
+            >
+              <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
+                A Shoe Color({result.basic[0].name})
+              </p>
 
-            <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
-              A Shoe Size({size[currentIndex]})
-            </p>
-            {/* shoe sizes */}
-            <div className="grid grid-cols-4 gap-1 mt-4 ps-10">
-              {size.map((size, index) => {
-                const isActive = index === currentIndex;
-                return (
-                  <button
-                    key={size}
-                    className={` w-full h-8 rounded-full text-[11px] border transition-all
+              <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
+                A Shoe Size({size[currentIndex]})
+              </p>
+              {/* shoe sizes */}
+              <div className="grid grid-cols-4 gap-1 mt-4 ps-10">
+                {size.map((size, index) => {
+                  const isActive = index === currentIndex;
+                  return (
+                    <button
+                      key={size}
+                      className={` w-full h-8 rounded-full text-[11px] border transition-all
                   ${
                     isActive
                       ? "border-white/60 bg-white/100 text-black/90"
                       : "border-white/20 text-white/50 hover:border-white/40"
                   }`}
-                    onClick={() => goToSlide(index)}
-                  >
-                    {size}
-                  </button>
-                );
-              })}
+                      onClick={() => goToSlide(index)}
+                    >
+                      {size}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-2">
-            {/* right: button */}
-            <div>
-              <button
-                className="right-shift-btn mt-5 mr-7 group relative w-14 h-14 rounded-full 
+            <div className="grid grid-cols-2">
+              {/* right: button */}
+              <div>
+                <button
+                  className="right-shift-btn mt-5 mr-7 group relative w-14 h-14 rounded-full 
                 bg-gradient-to-br from-white/20 to-white/5 
                 backdrop-blur-xl border border-white/20 
                 shadow-[0_8px_30px_rgba(0,0,0,0.3)] 
                 hover:scale-105 transition-all duration-300"
-                onClick={next}
-              >
-                <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all"></div>
-
-                <span
-                  className="relative flex items-center justify-center w-full h-full text-white text-2xl 
-                  group-hover:translate-x-1 transition-transform"
+                  onClick={next}
                 >
-                  →
-                </span>
-              </button>
-            </div>
+                  <div className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all"></div>
 
-            {/* RIGHT: icons */}
-            <div className="flex flex-col items-end gap-3 mt-2">
-              {socialIcons.map(({ icon, link }, index) => (
-                <a
-                  key={index}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-media rounded-full p-2 
+                  <span
+                    className="relative flex items-center justify-center w-full h-full text-white text-2xl 
+                  group-hover:translate-x-1 transition-transform"
+                  >
+                    →
+                  </span>
+                </button>
+              </div>
+
+              {/* RIGHT: icons */}
+              <div className="flex flex-col items-end gap-3 mt-2">
+                {socialIcons.map(({ icon, link }, index) => (
+                  <a
+                    key={index}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-media rounded-full p-2 
                   bg-white/5 backdrop-blur-md 
                   border border-white/20 
                   text-white/80 
                   shadow-[0_4px_20px_rgba(0,0,0,0.25)] 
                   hover:bg-white/10 hover:text-white 
                   transition-all duration-300"
-                >
-                  {icon}
-                </a>
-              ))}
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-          <div
-            className="price-section flex items-center gap-3 rounded-full py-2 px-4 m-6 
+            <div
+              className="price-section flex items-center gap-3 rounded-full py-2 px-4 m-6 
             bg-white/5 backdrop-blur-md border border-white/20 
             text-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.25)]  overflow-hidden"
-          >
-            <button
-              className="shop-now-btn text-white text-xs font-bold px-5 py-2 rounded-full 
+            >
+              <button
+                className="shop-now-btn text-white text-xs font-bold px-5 py-2 rounded-full 
               backdrop-blur-xl border border-white/20 
               bg-gradient-to-br from-white/20 to-white/5 
               hover:scale-105 transition-all duration-300"
-            >
-              Shop Now
-            </button>
+              >
+                Shop Now
+              </button>
 
-            <span className="price-text text-white font-bold text-sm whitespace-nowrap">
-              {price}
-            </span>
+              <span className="price-text text-white font-bold text-sm whitespace-nowrap">
+                {price}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {/* show product detail model */}
+      {isModel && (
+        <ProductDetailModal onClose={() => setIsModel(false)} id={id} />
+      )}
+    </>
   );
 };
 
