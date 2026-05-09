@@ -17,7 +17,7 @@ const SignUp = ({ onClose }) => {
   const handleSubmit = () => {
     const errs = validate();
     if (Object.keys(errs).length > 0) return setErrors(errs);
-    console.log("Login:", form);
+    localStorage.setItem("user", JSON.stringify(form));
   };
 
   return (
@@ -97,7 +97,7 @@ const SignUp = ({ onClose }) => {
         </button>
 
         <p className="text-center text-white/40 text-xs mt-4">
-          Account nahi hai?{" "}
+          Account nahi hai?
           <span className="text-white cursor-pointer hover:underline">
             Sign up
           </span>

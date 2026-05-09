@@ -6,11 +6,10 @@ export default function ProductCard({ product }) {
   return (
     <>
       <div
-        className="bg-[#f5f5f5]  font-sans mb-5 rounded-lg p-4 flex-shrink-0 cursor-pointer group
-      w-[85vw]        
-      sm:w-[45vw]     
-      md:w-[30vw]     
-      lg:w-[calc(33.33%-12px)]"
+        className="bg-[#f5f5f5]  font-sans mb-5 rounded-lg p-4 cursor-pointer group
+        w-full                    
+        sm:min-w-[280px]          
+        md:min-w-[260px]"
       >
         {/* Image Box */}
         <div className="relative  rounded-xl overflow-hidden aspect-square mb-3 group">

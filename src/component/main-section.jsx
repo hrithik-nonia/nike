@@ -49,7 +49,7 @@ export function MainSection() {
         </div>
 
         {/* product section */}
-        <div className="col-span-10  grid grid-cols-3 ps-15">
+        <div className="col-span-10  grid grid-cols-2 lg:grid-cols-3 gap-4  ps-15">
           {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

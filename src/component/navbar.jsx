@@ -258,8 +258,8 @@ const NavBar = ({ isSolid }) => {
     });
   }, []);
 
-  // check is sign up
-  const [isSignUp, setIsSignUp] = useState("hb");
+  // get sign up value from localstorage
+  const storedData = JSON.parse(localStorage.getItem("user"));
 
   // show sign up form
   const [showSignUp, setShowSignUp] = useState(false);
@@ -321,7 +321,7 @@ const NavBar = ({ isSolid }) => {
 
         {/* Cart + Login */}
         <div className="flex items-center gap-2">
-          {isSignUp ? (
+          {storedData ? (
             <button
               ref={loginRef}
               to="#"
