@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../context-store/app-context";
+AppContext;
 export default function ProductType({ product, index }) {
+  // take value from context
+  const { setProductTitle } = useContext(AppContext);
   const [hovered, setHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -13,6 +17,7 @@ export default function ProductType({ product, index }) {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => setProductTitle(product.type)}
     >
       <div className="w-full  h-24 between">
         {imgError ? (

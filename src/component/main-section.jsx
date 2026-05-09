@@ -2,18 +2,30 @@ import { FilterDropdown } from "./cropdown";
 import { filters, products } from "../constant";
 import ProductCard from "../component/product-card";
 import Footer from "./footer";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { AppContext } from "../context-store/app-context";
 
 const getFilter = (label) => filters.find((f) => f.label === label);
 
 const BATCH = 6; //how many products laod on scroll
 
 export function MainSection() {
+  // take value from context
+  const { productTitle } = useContext(AppContext);
+
+  const filteredProduct = productTitle
+    ? products.filter(
+        (p) =>
+          (p.type || "").replace(/\s/g, "").toUpperCase() ===
+          (productTitle || "").replace(/\s/g, "").toUpperCase(),
+      )
+    : products;
+
   const [visible, setVisible] = useState(BATCH);
   const loaderRef = useRef(null);
 
-  const visibleProducts = products.slice(0, visible);
-  const hasMore = visible < products.length;
+  const visibleProducts = filteredProduct.slice(0, visible);
+  const hasMore = visible < filteredProduct.length;
 
   // load products when loder div comes on screen
   useEffect(() => {
@@ -32,7 +44,8 @@ export function MainSection() {
   return (
     <div className="px-8 pt-4">
       <h1 className="text-2xl text-white font-semibold pb-5">
-        Air Jordan 1 (36)
+        {productTitle ? productTitle : "All Products"} (
+        {filteredProduct ? filteredProduct.length : products.length})
       </h1>
       <div className="grid grid-cols-12 items-start ">
         <div className="col-span-2 border border-white/40 bg-white/10 backdrop-blur-md rounded-lg p-5 text-white sticky top-0 min-h-screen">
