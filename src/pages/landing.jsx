@@ -8,7 +8,7 @@ import { CiFacebook } from "react-icons/ci";
 import { RiTwitterXFill } from "react-icons/ri";
 import { products } from "../constant";
 import { AppContext } from "../context-store/app-context";
-import { FastAverageColor } from "fast-average-color";
+import namer from "color-namer"; //to simplify color name
 
 gsap.registerPlugin(useGSAP, SplitText);
 const Landing = () => {
@@ -211,9 +211,12 @@ const Landing = () => {
 
   // social media icons
   const socialIcons = [
-    <PiInstagramLogoLight size={"20px"} />,
-    <CiFacebook size={"20px"} />,
-    <RiTwitterXFill size={"20px"} />,
+    {
+      icon: <PiInstagramLogoLight size={"20px"} />,
+      link: "https://www.instagram.com/",
+    },
+    { icon: <CiFacebook size={"20px"} />, link: "https://www.facebook.com/" },
+    { icon: <RiTwitterXFill size={"20px"} />, link: "#" },
   ];
 
   // state for product scroll
@@ -250,6 +253,9 @@ const Landing = () => {
 
   // sizes of shoe
   const size = filteredProducts[index].size;
+
+  // take id of filtered product
+  const id = filteredProducts[index].id;
 
   // index \of size arr
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -328,7 +334,7 @@ const Landing = () => {
   }, [index]);
 
   // for background color
-  const { setBgColor } = useContext(AppContext);
+  const { setBgColor, bgColor } = useContext(AppContext);
   const imgRef = useRef(null);
 
   useEffect(() => {
@@ -418,6 +424,9 @@ const Landing = () => {
     };
   }, [index]);
 
+  // simplify color name
+  const result = namer(bgColor);
+
   return (
     <section className="absolute w-full">
       {/* CENTER — Product Slider */}
@@ -466,14 +475,18 @@ const Landing = () => {
               Step
             </h1>
 
-            <p className="shoe-text text-white text-xl tracking-[2.5px] uppercase mt-8 font-semibold relative inline-block ">
+            <NavLink
+              target="_blank"
+              to={`/ProductDetail/${id}`}
+              className="shoe-text text-white text-xl tracking-[2.5px] uppercase mt-8 font-semibold relative inline-block "
+            >
               {name}
               <span
                 className="shoe-underline absolute left-0 bottom-[-6px] w-full h-[2px] 
                 bg-gradient-to-r from-white to-transparent 
                 rotate-[0.5deg] blur-[0.3px] opacity-80"
               ></span>
-            </p>
+            </NavLink>
           </div>
 
           {/* left shift button */}
@@ -525,11 +538,11 @@ const Landing = () => {
             rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-4 "
           >
             <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
-              A Shoe Color(black)
+              A Shoe Color({result.basic[0].name})
             </p>
 
             <p className="text-white/100 text-[11px] tracking-[2.5px] uppercase mb-2 pe-10">
-              A Shoe Size(8)
+              A Shoe Size({size[currentIndex]})
             </p>
             {/* shoe sizes */}
             <div className="grid grid-cols-4 gap-1 mt-4 ps-10">
@@ -576,10 +589,12 @@ const Landing = () => {
 
             {/* RIGHT: icons */}
             <div className="flex flex-col items-end gap-3 mt-2">
-              {socialIcons.map((icon, index) => (
-                <NavLink
+              {socialIcons.map(({ icon, link }, index) => (
+                <a
                   key={index}
-                  to="#"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="social-media rounded-full p-2 
                   bg-white/5 backdrop-blur-md 
                   border border-white/20 
@@ -589,7 +604,7 @@ const Landing = () => {
                   transition-all duration-300"
                 >
                   {icon}
-                </NavLink>
+                </a>
               ))}
             </div>
           </div>

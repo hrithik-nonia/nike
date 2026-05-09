@@ -42,7 +42,7 @@ export default function Collection() {
   });
   return (
     <>
-      <div className="min-h-screen ">
+      <div className="min-h-screen bg-black">
         {/* Header */}
         <header className="text-center px-6 pt-16 pb-12 border-b border-gray-100">
           <h1

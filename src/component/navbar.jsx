@@ -10,7 +10,7 @@ import SignUp from "./sign-up";
 // register plugin
 gsap.registerPlugin(useGSAP, SplitText);
 
-const NavBar = () => {
+const NavBar = ({ isSolid }) => {
   // find current path
   const location = useLocation();
 
@@ -270,7 +270,7 @@ const NavBar = () => {
   return (
     <>
       <nav
-        className="relative z-10 pt-4 h-13 px-10 flex items-center justify-between"
+        className={`relative z-10 pt-4 h-13 px-10 flex items-center justify-between ${isSolid ? "bg-black" : "bg-transparent"}`}
         ref={navRef}
       >
         {/* Logo */}

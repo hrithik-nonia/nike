@@ -61,7 +61,7 @@ const Contact = () => {
   });
   return (
     <>
-      <div className="  w-full flex  absolute h-screen">
+      <div className="  w-full flex  absolute h-screen bg-black">
         <div className=" w-full h-full top-20 left-15 relative">
           <div>
             <h1 className="cont-heading text-6xl font-bold leading-tight text-white">

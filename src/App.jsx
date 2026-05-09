@@ -7,6 +7,8 @@ import Collection from "./pages/collection-page";
 import Cart from "./pages/cart";
 import { useContext } from "react";
 import { AppContext } from "./context-store/app-context";
+import ProductDetail from "./pages/selected-product-page";
+
 export default function App() {
   const location = useLocation();
 
@@ -14,7 +16,9 @@ export default function App() {
   const isRoutable =
     location.pathname === "/about" ||
     location.pathname === "/collection" ||
-    location.pathname === "/cart";
+    location.pathname === "/cart" ||
+    location.pathname === "/contact" ||
+    location.pathname.startsWith("/ProductDetail/");
 
   // set background color
   const { bgColor } = useContext(AppContext);
@@ -42,7 +46,7 @@ export default function App() {
       )}
 
       {/* ✅ NavBar hamesha ek baar */}
-      <NavBar />
+      <NavBar isSolid={isRoutable} />
 
       {/* ✅ Ek hi Routes */}
       <Routes>
@@ -51,6 +55,7 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/collection" element={<Collection />} />
         <Route path="/Cart" element={<Cart />} />
+        <Route path="/ProductDetail/:id" element={<ProductDetail />} />
       </Routes>
     </div>
   );
