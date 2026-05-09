@@ -618,14 +618,15 @@ const Landing = () => {
             bg-white/5 backdrop-blur-md border border-white/20 
             text-white/80 shadow-[0_4px_20px_rgba(0,0,0,0.25)]  overflow-hidden"
             >
-              <button
+              <NavLink
+                to="/perchese"
                 className="shop-now-btn text-white text-xs font-bold px-5 py-2 rounded-full 
               backdrop-blur-xl border border-white/20 
               bg-gradient-to-br from-white/20 to-white/5 
               hover:scale-105 transition-all duration-300"
               >
                 Shop Now
-              </button>
+              </NavLink>
 
               <span className="price-text text-white font-bold text-sm whitespace-nowrap">
                 {price}

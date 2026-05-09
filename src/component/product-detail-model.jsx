@@ -2,7 +2,7 @@ import { products } from "../constant";
 export default function ProductDetailModal({ onClose, id }) {
   // find product to show
   const product = products.find((p) => p.id === id);
-  const { name, title, desc, category, img, price } = product;
+  const { name, desc, category, img, price } = product;
 
   return (
     <div
@@ -66,30 +66,3 @@ export default function ProductDetailModal({ onClose, id }) {
     </div>
   );
 }
-
-// Usage
-// export default function App() {
-//   const [open, setOpen] = useState(false);
-
-//   const product = {
-//     name: "Air Jordan 1 Low SE",
-//     category: "Men's Shoes",
-//     price: "₹ 11,495",
-//     img: "/your-img.jpg",
-//     description: "Inspired by the original that debuted in 1985...",
-//     benefits: [
-//       "Encapsulated Air-Sole unit provides lightweight cushioning.",
-//       "Genuine leather in the upper offers durability and a premium look.",
-//       "Solid rubber outsole enhances traction on a variety of surfaces.",
-//     ],
-//     details: ["Wings logo on heel", "Jumpman on the tongue"],
-//     quantity: "1 Pair of Shoes",
-//   };
-
-//   return (
-//     <>
-//       <button onClick={() => setOpen(true)}>View Product Details</button>
-//       {open && <ProductDetailModal onClose={() => setOpen(false)} product={product} />}
-//     </>
-//   );
-// }

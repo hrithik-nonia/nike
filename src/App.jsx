@@ -8,6 +8,7 @@ import Cart from "./pages/cart";
 import { useContext } from "react";
 import { AppContext } from "./context-store/app-context";
 import ProductDetail from "./pages/selected-product-page";
+import AddressPage from "./pages/product-perches-page";
 
 export default function App() {
   const location = useLocation();
@@ -18,10 +19,14 @@ export default function App() {
     location.pathname === "/collection" ||
     location.pathname === "/cart" ||
     location.pathname === "/contact" ||
-    location.pathname.startsWith("/ProductDetail/");
+    location.pathname.startsWith("/ProductDetail/") ||
+    location.pathname === "/perchese";
 
   // set background color
   const { bgColor } = useContext(AppContext);
+
+  // pages which should not take navbar
+  const isIndependentPage = location.pathname === "/perchese";
   return (
     // ✅ Ek hi wrapper — sab routes isme
     <div
@@ -46,7 +51,7 @@ export default function App() {
       )}
 
       {/* ✅ NavBar hamesha ek baar */}
-      <NavBar isSolid={isRoutable} />
+      {!isIndependentPage && <NavBar isSolid={isRoutable} />}
 
       {/* ✅ Ek hi Routes */}
       <Routes>
@@ -56,6 +61,7 @@ export default function App() {
         <Route path="/collection" element={<Collection />} />
         <Route path="/Cart" element={<Cart />} />
         <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+        <Route path="/perchese" element={<AddressPage />} />
       </Routes>
     </div>
   );
