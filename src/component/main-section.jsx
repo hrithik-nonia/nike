@@ -11,7 +11,7 @@ const BATCH = 6; //how many products laod on scroll
 
 export function MainSection() {
   // take value from context
-  const { productTitle } = useContext(AppContext);
+  const { productTitle, filterBy } = useContext(AppContext);
 
   const filteredProduct = productTitle
     ? products.filter(
@@ -21,11 +21,18 @@ export function MainSection() {
       )
     : products;
 
+  // filter by sidebar element
+  const finalProduct = filterBy
+    ? filteredProduct.filter((p) => p.badge.toUpperCase())
+    : filteredProduct;
+
+  console.log(finalProduct);
+
   const [visible, setVisible] = useState(BATCH);
   const loaderRef = useRef(null);
 
-  const visibleProducts = filteredProduct.slice(0, visible);
-  const hasMore = visible < filteredProduct.length;
+  const visibleProducts = filteredProduct || finalProduct.slice(0, visible);
+  const hasMore = visible < filteredProduct || finalProduct.length;
 
   // load products when loder div comes on screen
   useEffect(() => {

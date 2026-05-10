@@ -4,17 +4,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { MainSection } from "../component/main-section";
-import { useContext } from "react";
-import { AppContext } from "../context-store/app-context";
 
 // register plugin
 gsap.registerPlugin(useGSAP, SplitText);
 
 export default function Collection() {
-  // take value from context
-  const { productTitle } = useContext(AppContext);
-  console.log(productTitle);
-
   // heading text animation
   useGSAP(() => {
     // heading text split

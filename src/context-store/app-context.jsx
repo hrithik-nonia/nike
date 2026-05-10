@@ -9,9 +9,19 @@ const ContextStore = ({ children }) => {
   // state for product fillteing by by there title like(air jorden/ air force  etc...)
   const [productTitle, setProductTitle] = useState(null);
 
+  // state for filter product by sidebar filter element
+  const [filterBy, setFilterBy] = useState(null);
+
   return (
     <AppContext.Provider
-      value={{ bgColor, setBgColor, setProductTitle, productTitle }}
+      value={{
+        bgColor,
+        setBgColor,
+        setProductTitle,
+        productTitle,
+        filterBy,
+        setFilterBy,
+      }}
     >
       {children}
     </AppContext.Provider>
